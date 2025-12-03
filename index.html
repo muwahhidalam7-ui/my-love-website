@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Love - A Message From My Heart</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Cormorant+Garamond:wght@400;600&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background: linear-gradient(135deg, #0c0c1d 0%, #1a1a2e 50%, #16213e 100%);
+      color: #f8e9e9;
+      min-height: 100vh;
+      overflow-x: hidden;
+      opacity: 0;
+      animation: fadeInBody 1.5s ease-out forwards;
+    }
+
+    @keyframes fadeInBody {
+      to { opacity: 1; }
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 0 50px;
+      opacity: 0;
+      transform: translateY(-30px);
+      animation: slideDown 1s ease-out 0.5s forwards;
+    }
+
+    @keyframes slideDown {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4.2rem;
+      color: #ff7eb9;
+      text-shadow: 0 0 20px rgba(255, 126, 185, 0.5);
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #ff7eb9, transparent);
+      animation: pulseLine 2s ease-in-out infinite;
+    }
+
+    @keyframes pulseLine {
+      0%, 100% { width: 100px; opacity: 0.7; }
+      50% { width: 150px; opacity: 1; }
+    }
+
+    .hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255, 126, 185, 0.6);
+      font-size: 24px;
+      opacity: 0;
+      animation: float 8s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.5);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+        transform: scale(1);
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    .message-section {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 50px 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message-section:nth-child(1) { animation-delay: 0.8s; }
+    .message-section:nth-child(2) { animation-delay: 1.2s; }
+
+    .message-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 50px rgba(255, 126, 185, 0.15);
+    }
+
+    .message-text {
+      font-size: 1.9rem;
+      line-height: 1.9;
+      color: #f0e6f6;
+      text-align: center;
+      position: relative;
+      padding: 0 10px;
+      margin: 30px 0;
+    }
+
+    .message-text::before {
+      content: "“";
+      font-size: 8rem;
+      color: rgba(255, 126, 185, 0.2);
+      position: absolute;
+      top: -50px;
+      left: -20px;
+      font-family: serif;
+      animation: quotePulse 3s ease-in-out infinite;
+    }
+
+    .message-text::after {
+      content: "”";
+      font-size: 8rem;
+      color: rgba(255, 126, 185, 0.2);
+      position: absolute;
+      bottom: -80px;
+      right: -20px;
+      font-family: serif;
+      animation: quotePulse 3s ease-in-out infinite 0.5s;
+    }
+
+    @keyframes quotePulse {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.3; }
+    }
+
+    .divider {
+      text-align: center;
+      margin: 40px 0;
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 1.6s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .divider-heart {
+      color: #ff7eb9;
+      font-size: 2.5rem;
+      background: rgba(26, 26, 46, 0.8);
+      padding: 0 20px;
+      display: inline-block;
+      position: relative;
+      z-index: 2;
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 126, 185, 0.3), transparent);
+      z-index: 1;
+      animation: lineGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes lineGlow {
+      0%, 100% { background: linear-gradient(90deg, transparent, rgba(255, 126, 185, 0.3), transparent); }
+      50% { background: linear-gradient(90deg, transparent, rgba(255, 126, 185, 0.6), transparent); }
+    }
+
+    .floating-words {
+      position: absolute;
+      font-family: 'Dancing Script', cursive;
+      color: rgba(255, 182, 193, 0.7);
+      font-size: 1.6rem;
+      z-index: 2;
+      pointer-events: none;
+      animation: float-word 25s linear infinite;
+    }
+
+    @keyframes float-word {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 0 20px;
+      color: #a8d0e6;
+      font-size: 1.1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 2s forwards;
+    }
+
+    .love-frame-1 {
+      margin-bottom: 30px;
+      border: 5px solid #ff7eb9;
+      border-radius: 50%;
+      padding: 10px;
+      box-shadow: 0 0 25px rgba(255, 126, 185, 0.4),
+      inset 0 0 20px rgba(255, 126, 185, 0.2);
+      width: 200px;
+      height: 200px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      animation: rotateFrame 20s linear infinite;
+      transition: all 0.5s ease;
+    }
+
+    @keyframes rotateFrame {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .love-frame-1:hover {
+      animation-play-state: paused;
+      transform: scale(1.1);
+      box-shadow: 0 0 40px rgba(255, 126, 185, 0.6),
+      inset 0 0 30px rgba(255, 126, 185, 0.3);
+    }
+
+    .love-frame-1 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: transform 0.5s ease;
+    }
+
+    .love-frame-1:hover img {
+      transform: scale(1.1);
+    }
+
+    .love-frame-2 {
+      margin-top: 30px;
+      border: 5px solid #ffb6c1;
+      border-radius: 10%;
+      padding: 10px;
+      box-shadow: 0 0 25px rgba(255, 182, 193, 0.4),
+      inset 0 0 20px rgba(255, 182, 193, 0.2);
+      width: 200px;
+      height: 200px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      animation: floatFrame 4s ease-in-out infinite;
+      transition: all 0.5s ease;
+    }
+
+    @keyframes floatFrame {
+      0%, 100% { transform: translateY(0) rotate(3deg); }
+      50% { transform: translateY(-15px) rotate(3deg); }
+    }
+
+    .love-frame-2:hover {
+      animation-play-state: paused;
+      transform: scale(1.1) rotate(3deg);
+      box-shadow: 0 0 40px rgba(255, 182, 193, 0.6),
+      inset 0 0 30px rgba(255, 182, 193, 0.3);
+    }
+
+    .love-frame-2 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10%;
+      transform: rotate(-3deg);
+      transition: transform 0.5s ease;
+    }
+
+    .love-frame-2:hover img {
+      transform: scale(1.1) rotate(-3deg);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+
+      .message-section {
+        padding: 30px 20px;
+      }
+
+      .message-text {
+        font-size: 1.5rem;
+        line-height: 1.7;
+      }
+
+      .message-text::before {
+        font-size: 6rem;
+        top: -30px;
+        left: -10px;
+      }
+
+      .message-text::after {
+        font-size: 6rem;
+        bottom: -60px;
+        right: -10px;
+      }
+
+      .love-frame-1, .love-frame-2 {
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    /* Enhanced text styling */
+    .capitalize-first::first-letter {
+      font-size: 2.5rem;
+      color: #ffb6c1;
+      float: left;
+      line-height: 1;
+      margin-right: 8px;
+      margin-top: 8px;
+      font-family: 'Dancing Script', cursive;
+      text-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+    }
+
+    .text-highlight {
+      color: #ffb6c1;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+      position: relative;
+      display: inline-block;
+    }
+
+    .text-highlight::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ffb6c1, transparent);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .text-highlight:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* Sparkle effect for special words */
+    .sparkle {
+      display: inline-block;
+      position: relative;
+    }
+
+    .sparkle::before {
+      content: '✨';
+      position: absolute;
+      top: -10px;
+      left: -5px;
+      font-size: 0.8em;
+      opacity: 0;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+<div class="hearts-container" id="heartsContainer"></div>
+
+<div class="container">
+  <header>
+    <h1>My Love</h1>
+  </header>
+
+  <div class="message-section">
+    <div class="love-frame-1">
+      <img src="image_0.jpg" alt="My Love">
+    </div>
+    <div class="message-text">
+      <span class="capitalize-first">A</span>ny problem you are in , it's my problem . We may not be together in every happiness but I am here always in your every pain and to help you heal. I also want to be and do my best to be the man you expected me to be . <span class="text-highlight">i love you soooooo much and care toooo much for you</span> ...
+    </div>
+  </div>
+
+  <div class="divider">
+    <div class="divider-heart">♥</div>
+  </div>
+
+  <div class="message-section">
+    <div class="message-text">
+      <span class="capitalize-first">I</span> love you very much my love . Every time,every day, every hour, every minute. May my love touch you and calm your soul. You are part of my life that I never want to change or remove. <span class="text-highlight">only mine you are!!</span> I love you like the God tells to love someone and care for you from my deep heart . May you always be safe and always the woman I have or ever wanted ..
+    </div>
+    <div class="love-frame-2">
+      <img src="image_0.jpg" alt="My Love">
+    </div>
+  </div>
+
+  <footer>
+    <p>With all my heart <span class="sparkle">❤️</span></p>
+  </footer>
+</div>
+
+<script>
+  // Create floating hearts animation
+  function createHearts() {
+    const heartsContainer = document.getElementById('heartsContainer');
+    const heartCount = 60;
+
+    for (let i = 0; i < heartCount; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '♥';
+
+      const size = Math.random() * 20 + 15;
+      const startPosition = Math.random() * 100;
+      const animationDuration = Math.random() * 10 + 8;
+      const animationDelay = Math.random() * 6;
+
+      heart.style.left = `${startPosition}%`;
+      heart.style.fontSize = `${size}px`;
+      heart.style.animationDuration = `${animationDuration}s`;
+      heart.style.animationDelay = `${animationDelay}s`;
+
+      const colors = ['#ff7eb9', '#ffb6c1', '#ff9ec0', '#ffaccd'];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      heart.style.color = randomColor;
+
+      heartsContainer.appendChild(heart);
+    }
+  }
+
+  // Create floating romantic words
+  function createFloatingWords() {
+    const words = ['Love', 'Forever', 'Always', 'You', 'Mine', 'Heart', 'Soul', 'Eternal', 'Beloved', 'Passion'];
+
+    words.forEach((word) => {
+      const floatingWord = document.createElement('div');
+      floatingWord.classList.add('floating-words');
+      floatingWord.textContent = word;
+
+      const startPosition = Math.random() * 90 + 5;
+      const animationDuration = Math.random() * 30 + 20;
+      const animationDelay = Math.random() * 12;
+      const fontSize = Math.random() * 12 + 18;
+
+      floatingWord.style.left = `${startPosition}%`;
+      floatingWord.style.animationDuration = `${animationDuration}s`;
+      floatingWord.style.animationDelay = `${animationDelay}s`;
+      floatingWord.style.fontSize = `${fontSize}px`;
+
+      const colors = ['rgba(255, 126, 185, 0.6)', 'rgba(255, 182, 193, 0.6)', 'rgba(255, 140, 205, 0.6)'];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      floatingWord.style.color = randomColor;
+
+      document.querySelector('.container').appendChild(floatingWord);
+    });
+  }
+
+  // Add interactive heart click effect
+  function addHeartClickEffect() {
+    document.addEventListener('click', function(e) {
+      const heart = document.createElement('div');
+      heart.innerHTML = '♥';
+      heart.style.position = 'fixed';
+      heart.style.left = `${e.clientX}px`;
+      heart.style.top = `${e.clientY}px`;
+      heart.style.fontSize = '24px';
+      heart.style.color = '#ff7eb9';
+      heart.style.pointerEvents = 'none';
+      heart.style.zIndex = '1000';
+      heart.style.animation = 'clickHeart 1s ease-out forwards';
+
+      // Add animation for click hearts
+      const style = document.createElement('style');
+      style.textContent = `
+                @keyframes clickHeart {
+                    0% {
+                        transform: translate(-50%, -50%) scale(0);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translate(-50%, -100px) scale(1);
+                        opacity: 0;
+                    }
+                }
+            `;
+      document.head.appendChild(style);
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 1000);
+    });
+  }
+
+  // Add smooth scroll to sections on click
+  function addSmoothNavigation() {
+    const sections = document.querySelectorAll('.message-section');
+    sections.forEach(section => {
+      section.addEventListener('click', function() {
+        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+  }
+
+  // Initialize everything
+  document.addEventListener('DOMContentLoaded', function() {
+    createHearts();
+    createFloatingWords();
+    addHeartClickEffect();
+    addSmoothNavigation();
+
+    // Add more hearts periodically
+    setInterval(() => {
+      createHearts();
+    }, 8000);
+
+    // Add sparkle effect to highlighted text
+    const highlights = document.querySelectorAll('.text-highlight');
+    highlights.forEach((highlight, index) => {
+      highlight.classList.add('sparkle');
+      highlight.style.animationDelay = `${index * 0.5}s`;
+    });
+  });
+</script>
+</body>
+</html>
