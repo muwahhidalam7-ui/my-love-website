@@ -1,603 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Love - A Message From My Heart</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Cormorant+Garamond:wght@400;600&display=swap">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>will you be my valentine? 💝 (your pictures framed)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
 
-    body {
-      font-family: 'Cormorant Garamond', serif;
-      background: linear-gradient(135deg, #0c0c1d 0%, #1a1a2e 50%, #16213e 100%);
-      color: #f8e9e9;
-      min-height: 100vh;
-      overflow-x: hidden;
-      opacity: 0;
-      animation: fadeInBody 1.5s ease-out forwards;
-    }
+        body {
+            min-height: 100vh;
+            background: #ffd9e6;
+            background-image: radial-gradient(circle at 10% 30%, #ffe4ec 0%, #ffc0cb 100%);
+            padding: 80px 40px;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
 
-    @keyframes fadeInBody {
-      to { opacity: 1; }
-    }
+        /* floating hearts (decorative background) */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.5;
+            color: #ff99cc;
+            animation: float 12s infinite ease-in-out;
+            user-select: none;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.8); opacity: 0.7; }
+            100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
+        }
+        .heart:nth-child(1) { left: 5%; animation-duration: 14s; }
+        .heart:nth-child(2) { left: 15%; font-size: 2.4rem; animation-duration: 16s; animation-delay: 1s; }
+        .heart:nth-child(3) { left: 25%; animation-duration: 10s; animation-delay: 0.5s; }
+        .heart:nth-child(4) { left: 35%; font-size: 2.2rem; animation-duration: 15s; animation-delay: 2s; }
+        .heart:nth-child(5) { left: 45%; animation-duration: 12s; animation-delay: 0.2s; }
+        .heart:nth-child(6) { left: 55%; font-size: 2.8rem; animation-duration: 13s; animation-delay: 1.5s; }
+        .heart:nth-child(7) { left: 65%; animation-duration: 17s; animation-delay: 0.8s; }
+        .heart:nth-child(8) { left: 75%; font-size: 2.1rem; animation-duration: 11s; animation-delay: 2.2s; }
+        .heart:nth-child(9) { left: 85%; animation-duration: 14s; animation-delay: 0.3s; }
+        .heart:nth-child(10) { left: 95%; font-size: 2.3rem; animation-duration: 13s; animation-delay: 2.7s; }
 
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      position: relative;
-      z-index: 10;
-    }
+        /* main container – holds both border images and the card */
+        .page-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 1000px;       /* plenty of vertical space */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
 
-    header {
-      text-align: center;
-      padding: 30px 0 50px;
-      opacity: 0;
-      transform: translateY(-30px);
-      animation: slideDown 1s ease-out 0.5s forwards;
-    }
+        /* ===== 12 image frames placed around the border ===== */
+        .border-image {
+            position: absolute;
+            width: 160px;              /* comfortable size */
+            background: white;
+            padding: 8px;
+            border-radius: 30px;
+            border: 4px solid #ff80a5;
+            box-shadow: 0 10px 0 #b3446b, 0 15px 25px -8px rgba(240, 128, 128, 0.8);
+            transition: transform 0.3s ease;
+            z-index: 40;                /* above the card, but positioned away */
+            pointer-events: none;       /* keep card buttons clickable */
+        }
 
-    @keyframes slideDown {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .border-image img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 22px;
+            display: block;
+            background: #fadadd;        /* soft pink fallback while loading */
+            border: 2px solid #ffb3c6;
+        }
 
-    h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: 4.2rem;
-      color: #ff7eb9;
-      text-shadow: 0 0 20px rgba(255, 126, 185, 0.5);
-      margin-bottom: 10px;
-      letter-spacing: 1px;
-      position: relative;
-      display: inline-block;
-    }
+        /* hover effect for fun */
+        .border-image:hover {
+            transform: scale(1.08) rotate(0deg) !important;
+            filter: brightness(1.05);
+        }
 
-    h1::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #ff7eb9, transparent);
-      animation: pulseLine 2s ease-in-out infinite;
-    }
+        /* ----- positions: evenly spread around, no overlap with card ----- */
+        /* top row (3 images) */
+        .img1  { top: -1%; left: 5%; transform: rotate(-6deg); }
+        .img2  { top: -2%; left: 40%; transform: rotate(4deg); }
+        .img3  { top: -1%; right: 5%; transform: rotate(-5deg); }
 
-    @keyframes pulseLine {
-      0%, 100% { width: 100px; opacity: 0.7; }
-      50% { width: 150px; opacity: 1; }
-    }
+        /* right column (3 images) */
+        .img4  { top: 15%; right: -1%; transform: rotate(7deg); }
+        .img5  { top: 40%; right: -1%; transform: rotate(-5deg); }
+        .img6  { bottom: 15%; right: -1%; transform: rotate(9deg); }
 
-    .hearts-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1;
-    }
+        /* bottom row (3 images) */
+        .img7  { bottom: -2%; left: 10%; transform: rotate(-7deg); }
+        .img8  { bottom: -3%; left: 45%; transform: rotate(3deg); }
+        .img9  { bottom: -2%; right: 10%; transform: rotate(-4deg); }
 
-    .heart {
-      position: absolute;
-      color: rgba(255, 126, 185, 0.6);
-      font-size: 24px;
-      opacity: 0;
-      animation: float 8s linear infinite;
-    }
+        /* left column (3 images) */
+        .img10 { top: 15%; left: -1%; transform: rotate(-7deg); }
+        .img11 { top: 45%; left: -1%; transform: rotate(6deg); }
+        .img12 { bottom: 20%; left: -1%; transform: rotate(-5deg); }
 
-    @keyframes float {
-      0% {
-        transform: translateY(100vh) rotate(0deg) scale(0.5);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.7;
-        transform: scale(1);
-      }
-      90% {
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-100px) rotate(360deg) scale(0.5);
-        opacity: 0;
-      }
-    }
+        /* central Valentine card – narrower with big margins */
+        .valentine-card {
+            max-width: 700px;
+            width: 100%;
+            background: #fff0f5;
+            border: 4px solid #ff99bb;
+            border-radius: 60px 60px 50px 50px;
+            box-shadow: 0 25px 35px rgba(255, 105, 180, 0.4), 0 0 0 12px #ffe2f0;
+            padding: 45px 35px;
+            backdrop-filter: blur(4px);
+            position: relative;
+            z-index: 30;                /* below images, but images are placed outside */
+            margin: 100px auto;         /* extra vertical space for bottom images */
+            animation: cardAppear 1s ease-out;
+        }
+        @keyframes cardAppear {
+            0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
 
-    .message-section {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 50px 40px;
-      margin-bottom: 40px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.4s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 0.8s ease-out forwards;
-    }
+        .view-container {
+            background: rgba(255, 240, 245, 0.8);
+            border-radius: 70px 70px 50px 50px;
+            padding: 40px 30px;
+            border: 3px dashed #ff99bb;
+            box-shadow: inset 0 0 30px #ffd9e6, 0 12px 15px rgba(255, 192, 203, 0.6);
+            text-align: center;
+        }
 
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .view {
+            transition: opacity 0.5s ease, transform 0.4s ease;
+            animation: viewFadeIn 0.7s;
+        }
+        @keyframes viewFadeIn {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
 
-    .message-section:nth-child(1) { animation-delay: 0.8s; }
-    .message-section:nth-child(2) { animation-delay: 1.2s; }
+        .greeting, .thankyou-greeting {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.7rem;
+            font-weight: 700;
+            color: #b34167;
+            text-shadow: 4px 4px 0 #ffb6d1, 6px 6px 0 rgba(255, 255, 255, 0.6);
+            line-height: 1.4;
+            margin-bottom: 25px;
+            background: #ffeef2;
+            padding: 20px 25px;
+            border-radius: 90px 25px 90px 25px;
+            display: inline-block;
+            border: 4px solid #ff99bb;
+            box-shadow: 0 6px 0 #b3446b;
+            animation: pulseSoft 3s infinite ease-in-out;
+        }
+        @keyframes pulseSoft {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); text-shadow: 4px 4px 0 #ffb6d1, 8px 8px 0 rgba(255,255,200,0.7); }
+            100% { transform: scale(1); }
+        }
 
-    .message-section:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 50px rgba(255, 126, 185, 0.15);
-    }
+        .greeting span, .thankyou-greeting span {
+            display: inline-block;
+            font-size: 3rem;
+            animation: wobble 4s infinite;
+        }
+        @keyframes wobble {
+            0%,100% { transform: rotate(0deg); }
+            25% { transform: rotate(6deg); }
+            75% { transform: rotate(-6deg); }
+        }
 
-    .message-text {
-      font-size: 1.9rem;
-      line-height: 1.9;
-      color: #f0e6f6;
-      text-align: center;
-      position: relative;
-      padding: 0 10px;
-      margin: 30px 0;
-    }
+        .question {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: #a52d5f;
+            background: #ffe4ed;
+            padding: 18px 30px;
+            border-radius: 60px;
+            margin: 30px 0 25px;
+            border: 3px solid #ff80b0;
+            box-shadow: 0 6px 0 #d96f8f;
+            display: inline-block;
+            animation: slideIn 0.9s;
+        }
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateX(-25px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
 
-    .message-text::before {
-      content: "“";
-      font-size: 8rem;
-      color: rgba(255, 126, 185, 0.2);
-      position: absolute;
-      top: -50px;
-      left: -20px;
-      font-family: serif;
-      animation: quotePulse 3s ease-in-out infinite;
-    }
+        .btn {
+            background: #ff69b4;
+            border: none;
+            padding: 16px 45px;
+            margin: 15px 18px;
+            font-size: 2rem;
+            font-weight: 700;
+            border-radius: 70px;
+            color: white;
+            text-shadow: 3px 3px 0 #b3426c;
+            box-shadow: 0 10px 0 #a13b5e, 0 12px 20px rgba(255, 20, 147, 0.3);
+            cursor: pointer;
+            transition: all 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid #ffe2f0;
+            letter-spacing: 1.5px;
+            animation: buttonPop 0.6s;
+        }
+        @keyframes buttonPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0 #a13b5e, 0 18px 25px #ffb6c1;
+            background: #ff80bf;
+        }
+        .btn:active {
+            transform: translateY(8px);
+            box-shadow: 0 3px 0 #a13b5e, 0 8px 15px #ffb6c1;
+        }
+        .btn.no {
+            background: #d9467a;
+            box-shadow: 0 10px 0 #922b55;
+        }
+        .btn.tryagain {
+            background: #b37496;
+            font-size: 1.8rem;
+        }
+        .btn.letsgo {
+            background: #ff8cb0;
+            font-size: 2.4rem;
+            padding: 18px 60px;
+            margin-top: 30px;
+        }
 
-    .message-text::after {
-      content: "”";
-      font-size: 8rem;
-      color: rgba(255, 126, 185, 0.2);
-      position: absolute;
-      bottom: -80px;
-      right: -20px;
-      font-family: serif;
-      animation: quotePulse 3s ease-in-out infinite 0.5s;
-    }
+        .error-404 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            font-weight: bold;
+            color: #b33b5c;
+            text-shadow: 5px 5px 0 #ffb6c1;
+            background: #fff0f3;
+            padding: 25px;
+            border-radius: 50px;
+            border: 6px dotted #ff7b9c;
+            margin-bottom: 30px;
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            20% { transform: translateX(-10px); }
+            40% { transform: translateX(10px); }
+            60% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+        }
 
-    @keyframes quotePulse {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 0.3; }
-    }
+        .praise-paragraph {
+            font-size: 1.8rem;
+            background: #ffe4f0;
+            padding: 45px 35px;
+            border-radius: 70px 25px 70px 25px;
+            margin: 40px 0 30px;
+            border: 4px solid #ff99bb;
+            box-shadow: inset 0 0 20px white, 0 10px 0 #ce6f92;
+            color: #691c38;
+            line-height: 1.9;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeUp 1.3s;
+        }
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(25px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
 
-    .divider {
-      text-align: center;
-      margin: 40px 0;
-      position: relative;
-      opacity: 0;
-      animation: fadeIn 1s ease-out 1.6s forwards;
-    }
+        .link-btn {
+            text-decoration: none;
+        }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
+        .footer-note {
+            color: #ba2d63;
+            margin-top: 30px;
+            font-size: 1.3rem;
+            opacity: 0.9;
+            animation: fadeIn 2s;
+        }
 
-    .divider-heart {
-      color: #ff7eb9;
-      font-size: 2.5rem;
-      background: rgba(26, 26, 46, 0.8);
-      padding: 0 20px;
-      display: inline-block;
-      position: relative;
-      z-index: 2;
-      animation: heartbeat 1.5s ease-in-out infinite;
-    }
-
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-
-    .divider::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 126, 185, 0.3), transparent);
-      z-index: 1;
-      animation: lineGlow 2s ease-in-out infinite;
-    }
-
-    @keyframes lineGlow {
-      0%, 100% { background: linear-gradient(90deg, transparent, rgba(255, 126, 185, 0.3), transparent); }
-      50% { background: linear-gradient(90deg, transparent, rgba(255, 126, 185, 0.6), transparent); }
-    }
-
-    .floating-words {
-      position: absolute;
-      font-family: 'Dancing Script', cursive;
-      color: rgba(255, 182, 193, 0.7);
-      font-size: 1.6rem;
-      z-index: 2;
-      pointer-events: none;
-      animation: float-word 25s linear infinite;
-    }
-
-    @keyframes float-word {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.6;
-      }
-      90% {
-        opacity: 0.6;
-      }
-      100% {
-        transform: translateY(-100px) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px 0 20px;
-      color: #a8d0e6;
-      font-size: 1.1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      margin-top: 20px;
-      opacity: 0;
-      animation: fadeIn 1s ease-out 2s forwards;
-    }
-
-    .love-frame-1 {
-      margin-bottom: 30px;
-      border: 5px solid #ff7eb9;
-      border-radius: 50%;
-      padding: 10px;
-      box-shadow: 0 0 25px rgba(255, 126, 185, 0.4),
-      inset 0 0 20px rgba(255, 126, 185, 0.2);
-      width: 200px;
-      height: 200px;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      animation: rotateFrame 20s linear infinite;
-      transition: all 0.5s ease;
-    }
-
-    @keyframes rotateFrame {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .love-frame-1:hover {
-      animation-play-state: paused;
-      transform: scale(1.1);
-      box-shadow: 0 0 40px rgba(255, 126, 185, 0.6),
-      inset 0 0 30px rgba(255, 126, 185, 0.3);
-    }
-
-    .love-frame-1 img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      transition: transform 0.5s ease;
-    }
-
-    .love-frame-1:hover img {
-      transform: scale(1.1);
-    }
-
-    .love-frame-2 {
-      margin-top: 30px;
-      border: 5px solid #ffb6c1;
-      border-radius: 10%;
-      padding: 10px;
-      box-shadow: 0 0 25px rgba(255, 182, 193, 0.4),
-      inset 0 0 20px rgba(255, 182, 193, 0.2);
-      width: 200px;
-      height: 200px;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      animation: floatFrame 4s ease-in-out infinite;
-      transition: all 0.5s ease;
-    }
-
-    @keyframes floatFrame {
-      0%, 100% { transform: translateY(0) rotate(3deg); }
-      50% { transform: translateY(-15px) rotate(3deg); }
-    }
-
-    .love-frame-2:hover {
-      animation-play-state: paused;
-      transform: scale(1.1) rotate(3deg);
-      box-shadow: 0 0 40px rgba(255, 182, 193, 0.6),
-      inset 0 0 30px rgba(255, 182, 193, 0.3);
-    }
-
-    .love-frame-2 img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 10%;
-      transform: rotate(-3deg);
-      transition: transform 0.5s ease;
-    }
-
-    .love-frame-2:hover img {
-      transform: scale(1.1) rotate(-3deg);
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 3rem;
-      }
-
-      .message-section {
-        padding: 30px 20px;
-      }
-
-      .message-text {
-        font-size: 1.5rem;
-        line-height: 1.7;
-      }
-
-      .message-text::before {
-        font-size: 6rem;
-        top: -30px;
-        left: -10px;
-      }
-
-      .message-text::after {
-        font-size: 6rem;
-        bottom: -60px;
-        right: -10px;
-      }
-
-      .love-frame-1, .love-frame-2 {
-        width: 150px;
-        height: 150px;
-      }
-    }
-
-    /* Enhanced text styling */
-    .capitalize-first::first-letter {
-      font-size: 2.5rem;
-      color: #ffb6c1;
-      float: left;
-      line-height: 1;
-      margin-right: 8px;
-      margin-top: 8px;
-      font-family: 'Dancing Script', cursive;
-      text-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
-    }
-
-    .text-highlight {
-      color: #ffb6c1;
-      font-weight: 600;
-      text-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
-      position: relative;
-      display: inline-block;
-    }
-
-    .text-highlight::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #ffb6c1, transparent);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .text-highlight:hover::after {
-      transform: scaleX(1);
-    }
-
-    /* Sparkle effect for special words */
-    .sparkle {
-      display: inline-block;
-      position: relative;
-    }
-
-    .sparkle::before {
-      content: '✨';
-      position: absolute;
-      top: -10px;
-      left: -5px;
-      font-size: 0.8em;
-      opacity: 0;
-      animation: sparkle 2s ease-in-out infinite;
-    }
-
-    @keyframes sparkle {
-      0%, 100% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 1; transform: scale(1); }
-    }
-  </style>
+        /* on smaller screens, hide border images to keep readability */
+        @media (max-width: 900px) {
+            .border-image { width: 130px; }
+            .border-image img { height: 100px; }
+        }
+        @media (max-width: 700px) {
+            .border-image { display: none; }
+            body { padding: 40px 20px; }
+        }
+    </style>
 </head>
 <body>
-<div class="hearts-container" id="heartsContainer"></div>
-
-<div class="container">
-  <header>
-    <h1>My Love</h1>
-  </header>
-
-  <div class="message-section">
-    <div class="love-frame-1">
-      <img src="image_0.jpg" alt="My Love">
+    <!-- floating hearts background (purely decorative) -->
+    <div class="floating-hearts">
+        <div class="heart">❤️</div><div class="heart">💖</div><div class="heart">💗</div><div class="heart">💘</div>
+        <div class="heart">💝</div><div class="heart">💞</div><div class="heart">💕</div><div class="heart">💓</div>
+        <div class="heart">💟</div><div class="heart">❣️</div>
     </div>
-    <div class="message-text">
-      <span class="capitalize-first">A</span>ny problem you are in , it's my problem . We may not be together in every happiness but I am here always in your every pain and to help you heal. I also want to be and do my best to be the man you expected me to be . <span class="text-highlight">i love you soooooo much and care toooo much for you</span> ...
+
+    <!-- page wrapper: images around, card in center -->
+    <div class="page-wrapper">
+        <!-- 
+            12 image frames – they will automatically load your pictures 
+            named 1.jpg, 2.jpg, ..., 12.jpg if placed in the same folder.
+            Just replace the placeholder images with your own.
+        -->
+        <div class="border-image img1"><img src="1.jpg" alt="valentine memory 1" loading="lazy"></div>
+        <div class="border-image img2"><img src="2.jpg" alt="valentine memory 2" loading="lazy"></div>
+        <div class="border-image img3"><img src="3.jpg" alt="valentine memory 3" loading="lazy"></div>
+        <div class="border-image img4"><img src="4.jpg" alt="valentine memory 4" loading="lazy"></div>
+        <div class="border-image img5"><img src="5.jpg" alt="valentine memory 5" loading="lazy"></div>
+        <div class="border-image img6"><img src="6.jpg" alt="valentine memory 6" loading="lazy"></div>
+        <div class="border-image img7"><img src="7.jpg" alt="valentine memory 7" loading="lazy"></div>
+        <div class="border-image img8"><img src="8.jpg" alt="valentine memory 8" loading="lazy"></div>
+        <div class="border-image img9"><img src="9.jpg" alt="valentine memory 9" loading="lazy"></div>
+        <div class="border-image img10"><img src="10.jpg" alt="valentine memory 10" loading="lazy"></div>
+        <div class="border-image img11"><img src="11.jpg" alt="valentine memory 11" loading="lazy"></div>
+        <div class="border-image img12"><img src="12.jpg" alt="valentine memory 12" loading="lazy"></div>
+
+        <!-- main Valentine card -->
+        <div class="valentine-card">
+            <div class="view-container">
+                <!-- initial view (greeting + question) -->
+                <div id="initialView" class="view">
+                    <div class="greeting">
+                        <span>💖</span> hello my world 🌍 , my tahanan ko 🏠 , my closed lips beautiful vagina baobei 💋👶 , my everything 💞 <span>💖</span>
+                    </div>
+                    <div class="question">will you be my valentine? 💘</div>
+                    <div>
+                        <button class="btn yes" id="yesBtn">Yes 💝</button>
+                        <button class="btn no" id="noBtn">No 😢</button>
+                    </div>
+                </div>
+
+                <!-- error 404 view (hidden initially) -->
+                <div id="errorView" class="view" style="display: none;">
+                    <div class="error-404">💔 error 404 page made by you 💔</div>
+                    <button class="btn tryagain" id="tryAgainBtn">wrong choice, try again 🔄</button>
+                </div>
+
+                <!-- thank you view (hidden initially) -->
+                <div id="thanksView" class="view" style="display: none;">
+                    <div class="thankyou-greeting">
+                        <span>🌹</span> thank you my world 🌍 , my tahanan ko 🏠 , my closed lips beautiful vagina baobei 💋👶 , my everything 💞 <span>🌹</span>
+                    </div>
+                    <div class="praise-paragraph">
+                        <p>✨ My amazing love, ✨</p>
+                        <p>you are the softest sunrise and the calmest ocean. Your smile could heal any storm, and your laughter is the melody my heart always hums. You’re not just beautiful — you’re wisdom wrapped in grace, strength hidden in gentleness. Every moment with you feels like a page from a fairytale, and I still can’t believe you’re real. You make the world kinder just by being in it. Thank you for existing, for being you, for being mine. 💕</p>
+                        <p>you are my forever valentine. 🥰</p>
+                    </div>
+                    <a href="https://123movienow.cc/spa/videoPlayPage/movies/solo-leveling-IcfQ28CBFx1?id=1295107631744466896&type=/movie/detail&detailSe=&detailEp=&lang=en" target="_blank" rel="noopener noreferrer" class="link-btn">
+                        <button class="btn letsgo">Let's go 🎬✨</button>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-note">
+                💗 your 12 memories frame this moment — just add 1.jpg … 12.jpg 💗
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div class="divider">
-    <div class="divider-heart">♥</div>
-  </div>
+    <script>
+        (function() {
+            const initialView = document.getElementById('initialView');
+            const errorView = document.getElementById('errorView');
+            const thanksView = document.getElementById('thanksView');
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            const tryAgainBtn = document.getElementById('tryAgainBtn');
 
-  <div class="message-section">
-    <div class="message-text">
-      <span class="capitalize-first">I</span> love you very much my love . Every time,every day, every hour, every minute. May my love touch you and calm your soul. You are part of my life that I never want to change or remove. <span class="text-highlight">only mine you are!!</span> I love you like the God tells to love someone and care for you from my deep heart . May you always be safe and always the woman I have or ever wanted ..
-    </div>
-    <div class="love-frame-2">
-      <img src="image_0.jpg" alt="My Love">
-    </div>
-  </div>
+            function hideAllViews() {
+                initialView.style.display = 'none';
+                errorView.style.display = 'none';
+                thanksView.style.display = 'none';
+            }
+            function showInitial() { hideAllViews(); initialView.style.display = 'block'; }
+            function showError() { hideAllViews(); errorView.style.display = 'block'; }
+            function showThanks() { hideAllViews(); thanksView.style.display = 'block'; }
 
-  <footer>
-    <p>With all my heart <span class="sparkle">❤️</span></p>
-  </footer>
-</div>
-
-<script>
-  // Create floating hearts animation
-  function createHearts() {
-    const heartsContainer = document.getElementById('heartsContainer');
-    const heartCount = 60;
-
-    for (let i = 0; i < heartCount; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.innerHTML = '♥';
-
-      const size = Math.random() * 20 + 15;
-      const startPosition = Math.random() * 100;
-      const animationDuration = Math.random() * 10 + 8;
-      const animationDelay = Math.random() * 6;
-
-      heart.style.left = `${startPosition}%`;
-      heart.style.fontSize = `${size}px`;
-      heart.style.animationDuration = `${animationDuration}s`;
-      heart.style.animationDelay = `${animationDelay}s`;
-
-      const colors = ['#ff7eb9', '#ffb6c1', '#ff9ec0', '#ffaccd'];
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-      heart.style.color = randomColor;
-
-      heartsContainer.appendChild(heart);
-    }
-  }
-
-  // Create floating romantic words
-  function createFloatingWords() {
-    const words = ['Love', 'Forever', 'Always', 'You', 'Mine', 'Heart', 'Soul', 'Eternal', 'Beloved', 'Passion'];
-
-    words.forEach((word) => {
-      const floatingWord = document.createElement('div');
-      floatingWord.classList.add('floating-words');
-      floatingWord.textContent = word;
-
-      const startPosition = Math.random() * 90 + 5;
-      const animationDuration = Math.random() * 30 + 20;
-      const animationDelay = Math.random() * 12;
-      const fontSize = Math.random() * 12 + 18;
-
-      floatingWord.style.left = `${startPosition}%`;
-      floatingWord.style.animationDuration = `${animationDuration}s`;
-      floatingWord.style.animationDelay = `${animationDelay}s`;
-      floatingWord.style.fontSize = `${fontSize}px`;
-
-      const colors = ['rgba(255, 126, 185, 0.6)', 'rgba(255, 182, 193, 0.6)', 'rgba(255, 140, 205, 0.6)'];
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-      floatingWord.style.color = randomColor;
-
-      document.querySelector('.container').appendChild(floatingWord);
-    });
-  }
-
-  // Add interactive heart click effect
-  function addHeartClickEffect() {
-    document.addEventListener('click', function(e) {
-      const heart = document.createElement('div');
-      heart.innerHTML = '♥';
-      heart.style.position = 'fixed';
-      heart.style.left = `${e.clientX}px`;
-      heart.style.top = `${e.clientY}px`;
-      heart.style.fontSize = '24px';
-      heart.style.color = '#ff7eb9';
-      heart.style.pointerEvents = 'none';
-      heart.style.zIndex = '1000';
-      heart.style.animation = 'clickHeart 1s ease-out forwards';
-
-      // Add animation for click hearts
-      const style = document.createElement('style');
-      style.textContent = `
-                @keyframes clickHeart {
-                    0% {
-                        transform: translate(-50%, -50%) scale(0);
-                        opacity: 1;
-                    }
-                    100% {
-                        transform: translate(-50%, -100px) scale(1);
-                        opacity: 0;
-                    }
-                }
-            `;
-      document.head.appendChild(style);
-
-      document.body.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 1000);
-    });
-  }
-
-  // Add smooth scroll to sections on click
-  function addSmoothNavigation() {
-    const sections = document.querySelectorAll('.message-section');
-    sections.forEach(section => {
-      section.addEventListener('click', function() {
-        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      });
-    });
-  }
-
-  // Initialize everything
-  document.addEventListener('DOMContentLoaded', function() {
-    createHearts();
-    createFloatingWords();
-    addHeartClickEffect();
-    addSmoothNavigation();
-
-    // Add more hearts periodically
-    setInterval(() => {
-      createHearts();
-    }, 8000);
-
-    // Add sparkle effect to highlighted text
-    const highlights = document.querySelectorAll('.text-highlight');
-    highlights.forEach((highlight, index) => {
-      highlight.classList.add('sparkle');
-      highlight.style.animationDelay = `${index * 0.5}s`;
-    });
-  });
-</script>
+            yesBtn.addEventListener('click', showThanks);
+            noBtn.addEventListener('click', showError);
+            tryAgainBtn.addEventListener('click', showInitial);
+            window.addEventListener('load', showInitial);
+        })();
+    </script>
 </body>
 </html>
